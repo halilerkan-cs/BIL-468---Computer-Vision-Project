@@ -1,1 +1,31 @@
+Datasetten belirli sınıflar üzerinde işlem yapıldı.
 
+Ayıklanan sınıfların kodu şu şekilde.
+
+import os
+import pandas as pd
+
+# CSV dosyasının yolu
+csv_path = r'C:\Users\ŞeymaÇakmak\Desktop\BİL 468\Project\Project Code\Dataset\test_labels.csv'
+# Resimlerin bulunduğu klasör yolu
+images_folder_path = r'C:\Users\ŞeymaÇakmak\Desktop\BİL 468\Project\Project Code\Dataset\test_data\test_data'
+
+# CSV dosyasını yükle
+data = pd.read_csv(csv_path)
+
+# Tutulacak sınıflar
+keep_classes = [0, 12, 40, 42, 37, 39, 24]
+
+# Tutulacak sınıflar haricindeki tüm resimleri sil
+for index, row in data.iterrows():
+    if row['label'] not in keep_classes:
+        image_path = os.path.join(images_folder_path, row['image'])
+        if os.path.exists(image_path):
+            os.remove(image_path)
+            print(f"Silindi: {image_path}")
+        else:
+            print(f"Dosya bulunamadı, atlanıyor: {image_path}")
+
+
+Şu labela sahip sınıflar eğitildi. 
+0, 12, 40, 42, 37, 39, 24
